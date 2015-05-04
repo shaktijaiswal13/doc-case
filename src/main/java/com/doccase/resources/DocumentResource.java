@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -25,6 +26,12 @@ public class DocumentResource {
 		documentService = new DocumentService();
 	}
 
+	@Path("test")
+	@GET
+	public String test() {
+		return "test completed...";
+	}
+
 	@Path("upload")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -37,6 +44,7 @@ public class DocumentResource {
 
 		try {
 			fileData = new byte[file.available()];
+			file.read(fileData);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
