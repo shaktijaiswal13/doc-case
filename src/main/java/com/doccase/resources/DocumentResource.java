@@ -2,16 +2,23 @@ package com.doccase.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.StreamingOutput;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -43,6 +50,7 @@ public class DocumentResource {
 			@FormDataParam("file") FormDataContentDisposition contentDispositionHeader) {
 
 		String fileName = contentDispositionHeader.getFileName();
+		System.out.println("the file tyep is " + request.getContentType());
 		int fileSize = request.getContentLength();
 		System.out.println("file named " + fileName + " has size " + fileSize);
 
@@ -68,5 +76,44 @@ public class DocumentResource {
 		System.out.println("document saved...");
 
 		return Response.status(Status.OK).entity("Document saved...").build();
+	}
+
+	@Path("retrieve")
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Document> retrieveDocuments() {
+		List<Document> documentList = documentService.retrieveDocuments();
+		return documentList;
+	}
+
+	@Path("retrieve/{id}")
+	@GET
+	public Response retrieveDocument(@PathParam("id") String id) {
+
+		final Document document = documentService.retrieveDocument(id);
+
+		StreamingOutput st = new StreamingOutput() {
+			@Override
+			public void write(OutputStream os) throws IOException {
+				try {
+					os.write(document.getData());
+					os.close();
+				} catch (Exception e) {
+					throw new WebApplicationException(e);
+				}
+			}
+		};
+
+		ResponseBuilder response = Response.status(Status.OK);
+
+		String docName = document.getName();
+		String[] docNameArray = docName.split("/.");
+		if (docNameArray[1].equals("jpg")) {
+			response.header("content-type", "image/jpg");
+		}
+		response.header("content-disposition",
+				"inline; filename=" + document.getName());
+
+		return response.entity(st).build();
 	}
 }

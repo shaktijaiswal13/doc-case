@@ -1,6 +1,8 @@
 package com.doccase.dao;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.doccase.domain.Document;
 import com.mongodb.BasicDBObject;
@@ -32,14 +34,30 @@ public class DocumentDAO {
 				"data", document.getData()));
 	}
 
-	public Document retrieveDocument(String docName) {
-		DBCursor cursor = coll.find(new BasicDBObject("name", docName));
+	public Document retrieveDocument(String id) {
+		DBCursor cursor = coll.find(new BasicDBObject("id", id));
 		DBObject obj = (DBObject) cursor.next();
+		String docName = (String) obj.get("name");
 		byte[] docData = (byte[]) obj.get("data");
 		Document document = new Document();
 		document.setName(docName);
 		document.setData(docData);
 		return document;
+	}
+	
+	public List<Document> retrieveDocuments() {
+List<Document> documentList = new ArrayList<>();
+DBCursor cursor = coll.find();
+		while (cursor.hasNext()) {
+			DBObject obj = (DBObject) cursor.next();
+			String docName = (String) obj.get("name");
+			//byte[] docData = (byte[]) obj.get("data");
+			Document document = new Document();
+			document.setName(docName);
+			//document.setData(docData);
+			documentList.add(document);
+		}
+		return documentList;
 	}
 
 }
