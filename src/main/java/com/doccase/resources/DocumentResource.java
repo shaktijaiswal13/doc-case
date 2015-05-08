@@ -80,7 +80,7 @@ public class DocumentResource {
 
 	@Path("retrieve")
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Document> retrieveDocuments() {
 		List<Document> documentList = documentService.retrieveDocuments();
 		return documentList;
