@@ -108,9 +108,7 @@ public class DocumentResource {
 
 		String docName = document.getName();
 		String[] docNameArray = docName.split("\\.");
-		if (docNameArray[1].equals("jpg")) {
-			response.header("content-type", "image/jpg");
-		}
+		response.header("content-type", "image/" + docNameArray[1]);
 		response.header("content-disposition",
 				"inline; filename=" + document.getName());
 

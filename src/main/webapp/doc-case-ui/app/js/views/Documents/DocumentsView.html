@@ -1,10 +1,12 @@
 <p>All Documents</p>
 <div ng-controller="documentsCtrl">
-
-    <ul>
-        <li ng-repeat="doc in documents">
-            {{ doc.name }} , {{doc._id}}
-        </li>
-    </ul>
+    <table border="1px solid black">
+        <tr ng-repeat="doc in documents">
+            <td>{{ doc.name }}</td>
+            <td>
+                <img src="{{doc.imageURI}}" height="50px" width="50px" />
+            </td>
+        </tr>
+    </table>
 
 </div>
