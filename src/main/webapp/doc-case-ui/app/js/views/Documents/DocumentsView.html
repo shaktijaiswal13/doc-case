@@ -1,0 +1,10 @@
+<p>All Documents</p>
+<div ng-controller="documentsCtrl">
+
+    <ul>
+        <li ng-repeat="doc in documents">
+            {{ doc.name }} , {{doc._id}}
+        </li>
+    </ul>
+
+</div>

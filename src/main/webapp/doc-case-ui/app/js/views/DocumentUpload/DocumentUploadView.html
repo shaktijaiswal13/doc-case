@@ -1,0 +1,16 @@
+<p>Upload Document</p>
+<div ng-controller="documentUploadCtrl">
+    <!--        <form name="myForm">-->
+    <fieldset>
+        <legend>Enter Document Info</legend>
+        Document Name:
+        <input type="text" name="name" ng-model="name" size="39" required="">Scanned:
+        <input type="text" name="name" ng-model="name" size="39" required="">
+        <br>Document:
+        <div>
+            <input type="file" file-model="myFile" />
+            <button ng-click="uploadFile()">upload me</button>
+        </div>
+    </fieldset>
+    <br>
+</div>

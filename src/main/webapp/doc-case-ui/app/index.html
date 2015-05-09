@@ -18,43 +18,34 @@
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="js/views/Documents/DocumentsController.js"></script>
+    <script src="js/views/DocumentUpload/DocumentUploadController.js"></script>
     <script src="app.js"></script>
-    <script src="js/controller.js"></script>
+
 </head>
 
 <body>
-   
 
-    <div ng-controller="myCtrl">
-        <!--        <form name="myForm">-->
-        <fieldset>
-            <legend>Enter Document Info</legend>
-            Document Name:
-            <input type="text" name="name" ng-model="name" size="39" required="">Scanned:
-            <input type="text" name="name" ng-model="name" size="39" required="">
-            <br>Document:
-            <div>
-                <input type="file" file-model="myFile" />
-                <button ng-click="uploadFile()">upload me</button>
-            </div>
-        </fieldset>
-        <br>
-        <!--                </form>-->
+
+    <div>
+        <ul class="menu">
+            <li><a href="#/documents">Documents</a>
+            </li>
+            <li><a href="#/documentupload">Documents Upload</a>
+            </li>
+        </ul>
     </div>
 
+    <div ng-view></div>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-    <div ng-view></div>
-
-    <div>Angular seed app: v<span app-version></span>
-    </div>
 
     <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-    
+
 </body>
 
 </html>

@@ -2,8 +2,12 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
-  'myApp.version'
+    'ngRoute',
+    'myApp.Documents',
+    'myApp.DocumentUpload'
 ]).
-config(['$routeProvider', function($routeProvider) {
-}]);
+config(['$routeProvider',
+    function($routeProvider) {
+        //     redirectTo: '/view1'
+    }
+]);
