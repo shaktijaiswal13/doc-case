@@ -4,6 +4,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.doccase.domain.Document;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -35,7 +37,7 @@ public class DocumentDAO {
 	}
 
 	public Document retrieveDocument(String id) {
-		DBCursor cursor = coll.find(new BasicDBObject("id", id));
+		DBCursor cursor = coll.find(new BasicDBObject("_id", new ObjectId(id)));
 		DBObject obj = (DBObject) cursor.next();
 		String docName = (String) obj.get("name");
 		byte[] docData = (byte[]) obj.get("data");
@@ -44,17 +46,19 @@ public class DocumentDAO {
 		document.setData(docData);
 		return document;
 	}
-	
+
 	public List<Document> retrieveDocuments() {
-List<Document> documentList = new ArrayList<>();
-DBCursor cursor = coll.find();
+		List<Document> documentList = new ArrayList<>();
+		DBCursor cursor = coll.find();
 		while (cursor.hasNext()) {
 			DBObject obj = (DBObject) cursor.next();
+			ObjectId _id = (ObjectId) obj.get("_id");
 			String docName = (String) obj.get("name");
-			//byte[] docData = (byte[]) obj.get("data");
+			// byte[] docData = (byte[]) obj.get("data");
 			Document document = new Document();
+			document.set_id(_id.toString());
 			document.setName(docName);
-			//document.setData(docData);
+			// document.setData(docData);
 			documentList.add(document);
 		}
 		return documentList;

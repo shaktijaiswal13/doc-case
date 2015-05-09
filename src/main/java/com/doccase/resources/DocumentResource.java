@@ -107,7 +107,7 @@ public class DocumentResource {
 		ResponseBuilder response = Response.status(Status.OK);
 
 		String docName = document.getName();
-		String[] docNameArray = docName.split("/.");
+		String[] docNameArray = docName.split("\\.");
 		if (docNameArray[1].equals("jpg")) {
 			response.header("content-type", "image/jpg");
 		}
