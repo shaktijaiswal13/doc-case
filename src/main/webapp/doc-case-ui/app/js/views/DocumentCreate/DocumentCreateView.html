@@ -1,0 +1,30 @@
+<p>All Documents</p>
+<div ng-controller="documentCreateCtrl">
+    <fieldset>
+        <legend>Enter Document Info</legend>
+        <div>
+            <label>Document Name:</label>
+            <input type="text" name="name" ng-model="name" size="39">
+        </div>
+        <div>
+            <label>Scanned:</label>
+            <input type="checkbox" name="scanned" ng-model="scanned">
+        </div>
+        <div>
+            <label>Description:</label>
+            <input type="text" name="description" ng-model="description">
+        </div>
+        <div>
+            <label>Coloured:</label>
+            <input type="checkbox" name="coloured" ng-model="coloured">
+        </div>
+        <div>
+            <label>Signed:</label>
+            <input type="checkbox" name="signed" ng-model="signed">
+        </div>
+        <div ng-show="{{showSuccessMessage}}">Document saved Successfully!!!</div>
+        <div ng-show="{{showErrorMessage}}">{{errorMessage}}</div>
+        <div>{name:'{{name}}', description:'{{description}}', scanned:{{scanned}}, coloured:{{coloured}}, signed:{{signed}}}</div>
+    </fieldset>
+
+</div>

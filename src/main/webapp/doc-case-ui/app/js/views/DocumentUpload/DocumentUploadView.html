@@ -7,10 +7,12 @@
         <input type="text" name="name" ng-model="name" size="39" required="">Scanned:
         <input type="text" name="name" ng-model="name" size="39" required="">
         <br>Document:
-        <div>
+        <div ng-show="{{!showSuccessMessage}}">
             <input type="file" file-model="myFile" />
             <button ng-click="uploadFile()">upload me</button>
         </div>
+        <div ng-show="{{showSuccessMessage}}">File saved Successfully!!!</div>
+        <div ng-show="{{showErrorMessage}}">{{errorMessage}}</div>
     </fieldset>
     <br>
 </div>

@@ -54,8 +54,12 @@ angular.module('myApp.DocumentUpload', ['ngRoute'])
                     'Content-Type': undefined
                 }
             }).success(function() {
-                console.log("success....");
+                var showErrorMessage = false
+                var showSuccessMessage = true
             }).error(function(err) {
+                var showSuccessMessage = false
+                var showErrorMessage = true
+                var errorMessage = err
                 console.log("error...." + err);
             });
         }

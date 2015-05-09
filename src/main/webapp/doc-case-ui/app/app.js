@@ -4,7 +4,8 @@
 angular.module('myApp', [
     'ngRoute',
     'myApp.Documents',
-    'myApp.DocumentUpload'
+    'myApp.DocumentUpload',
+    'myApp.DocumentCreate',
 ]).
 config(['$routeProvider',
     function($routeProvider) {
