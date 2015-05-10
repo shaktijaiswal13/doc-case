@@ -13,12 +13,8 @@ public class DocumentService {
 		documentDAO = new DocumentDAO();
 	}
 
-	public void saveDocument(Document document) {
-		documentDAO.saveDocument(document);
-	}
-
-	public Document retrieveDocument(String docName) {
-		return documentDAO.retrieveDocument(docName);
+	public String saveDocument(Document document) {
+		return documentDAO.saveDocument(document);
 	}
 
 	public List<Document> retrieveDocuments() {

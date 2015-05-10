@@ -2,16 +2,22 @@ package com.doccase.domain;
 
 public class Document {
 
-	private String _id;
+	private String id;
 	private String name;
-	private byte[] data;
+	private String scanned;
+	private String url;
+	private String coloured;
+	private String signed;
+	private String description;
+	private String type;
+	private String[] label;
 
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -22,12 +28,60 @@ public class Document {
 		this.name = name;
 	}
 
-	public byte[] getData() {
-		return data;
+	public String getScanned() {
+		return scanned;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setScanned(String scanned) {
+		this.scanned = scanned;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getColoured() {
+		return coloured;
+	}
+
+	public void setColoured(String coloured) {
+		this.coloured = coloured;
+	}
+
+	public String getSigned() {
+		return signed;
+	}
+
+	public void setSigned(String signed) {
+		this.signed = signed;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String[] getLabel() {
+		return label;
+	}
+
+	public void setLabel(String[] label) {
+		this.label = label;
 	}
 
 }

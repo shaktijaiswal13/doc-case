@@ -14,43 +14,42 @@ import com.mongodb.DBObject;
 
 public class DocumentDAO {
 
-	public void saveDocument(Document document) {
+	public String saveDocument(Document document) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("testCollection");
-		collection.insert(new BasicDBObject("name", document.getName()).append(
-				"data", document.getData()));
-	}
-
-	public Document retrieveDocument(String id) {
-		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("testCollection");
-		DBCursor cursor = collection.find(new BasicDBObject("_id",
-				new ObjectId(id)));
-		DBObject obj = (DBObject) cursor.next();
-		String docName = (String) obj.get("name");
-		byte[] docData = (byte[]) obj.get("data");
-		Document document = new Document();
-		document.setName(docName);
-		document.setData(docData);
-		return document;
+				.getCollection("documentCollection");
+		BasicDBObject obj = new BasicDBObject("name", document.getName())
+				.append("scanned", document.getScanned())
+				.append("url", document.getUrl())
+				.append("coloured", document.getColoured())
+				.append("description", document.getDescription())
+				.append("signed", document.getSigned())
+				.append("type", document.getType())
+				.append("label", document.getLabel());
+		collection.insert(obj);
+		System.out.println("document saved with id "
+				+ String.valueOf(obj.get("_id")));
+		return String.valueOf(obj.get("_id"));
 	}
 
 	public List<Document> retrieveDocuments() {
 		List<Document> documentList = new ArrayList<>();
-		DBCursor cursor = DBConnectionFactory.getSharedFactory().getCollection("testCollection").find();
+		DBCursor cursor = DBConnectionFactory.getSharedFactory()
+				.getCollection("documentCollection").find();
 		while (cursor.hasNext()) {
 			DBObject obj = (DBObject) cursor.next();
-			ObjectId _id = (ObjectId) obj.get("_id");
-			String docName = (String) obj.get("name");
-			// byte[] docData = (byte[]) obj.get("data");
 			Document document = new Document();
-			document.set_id(_id.toString());
-			document.setName(docName);
-			// document.setData(docData);
+			document.setId(((ObjectId) obj.get("_id")).toString());
+			document.setName((String) obj.get("name"));
+			document.setScanned((String) obj.get("scanned"));
+			document.setUrl((String) obj.get("url"));
+			document.setColoured((String) obj.get("coloured"));
+			document.setDescription((String) obj.get("description"));
+			document.setSigned((String) obj.get("signed"));
+			document.setType((String) obj.get("type"));
+			// document.setLabel(obj.get("label"));
 			documentList.add(document);
 		}
 		return documentList;
 	}
-
 
 }
