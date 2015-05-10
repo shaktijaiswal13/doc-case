@@ -4,7 +4,7 @@
         <div ng-show="{{!showSuccessMessage}}">
             <label>Choose Picture:</label>
             <input type="file" file-model="myFile" />
-            <button ng-click="uploadFile()">upload me</button>
+            <button ng-click="uploadFile()" class="btn btn-primary">Upload</button>
         </div>
         <div ng-show="{{showSuccessMessage}}">File saved Successfully!!!</div>
         <div ng-show="{{showErrorMessage}}">{{errorMessage}}</div>
