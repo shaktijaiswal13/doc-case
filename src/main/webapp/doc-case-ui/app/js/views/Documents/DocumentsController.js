@@ -13,13 +13,13 @@ angular.module('myApp.Documents', ['ngRoute'])
 
 
 .controller('documentsCtrl', function($scope, $http) {
-    $http.get("./rest/documents/retrieve")
+    $http.get("./rest/documents")
         .success(function(response) {
             $scope.documents = response;
 
             for (var i = 0; i < $scope.documents.length; i++) {
-                var doc = $scope.documents[i]
-                doc.imageURI = $scope.getImageURI(doc._id)
+                //var doc = $scope.documents[i]
+                doc.url = "." + encodeURI(doc.url) + "/inline"
             }
         });
     $scope.getImageURI = function(id) {
