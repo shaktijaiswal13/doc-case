@@ -96,6 +96,7 @@
 							</excludes>
 						</resource>
 					</webResources>
+					<!-- <outputDirectory>/Users/shakumar/Downloads</outputDirectory> -->
 				</configuration>
 			</plugin>
 		</plugins>

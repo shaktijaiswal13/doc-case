@@ -22,7 +22,7 @@ angular.module('myApp.Documents', ['ngRoute'])
             }
         });
     $scope.deleteDocument = function(document) {
-        var url = ".rest/documents/" + encodeURIComponent(document.id);
+        var url = "rest/documents/" + encodeURIComponent(document.id);
         $http.delete(url).success(function(result) {
             console.log("File deleted successfully...." + result);
         }).error(function(err) {
