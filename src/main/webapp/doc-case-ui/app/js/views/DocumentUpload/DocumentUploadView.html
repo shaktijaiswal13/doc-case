@@ -1,13 +1,8 @@
-<p>Upload Document</p>
+<h2>Upload Document</h2>
 <div ng-controller="documentUploadCtrl">
-    <!--        <form name="myForm">-->
     <fieldset>
-        <legend>Enter Document Info</legend>
-        Document Name:
-        <input type="text" name="name" ng-model="name" size="39" required="">Scanned:
-        <input type="text" name="name" ng-model="name" size="39" required="">
-        <br>Document:
         <div ng-show="{{!showSuccessMessage}}">
+            <label>Choose Picture:</label>
             <input type="file" file-model="myFile" />
             <button ng-click="uploadFile()">upload me</button>
         </div>

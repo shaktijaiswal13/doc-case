@@ -1,10 +1,10 @@
-<p>All Documents</p>
+<h2>All Documents</h2>
 <div ng-controller="documentsCtrl">
-    <table border="1px solid black">
+    <table>
         <tr ng-repeat="doc in documents">
             <td>{{ doc.name }}</td>
             <td>
-                <img src="{{doc.imageURI}}" height="50px" width="50px" />
+                <img src="{{doc.imageURI}}" class="img-thumbnail" alt="{{doc.name}}" height="100px" width="100px" />
             </td>
         </tr>
     </table>

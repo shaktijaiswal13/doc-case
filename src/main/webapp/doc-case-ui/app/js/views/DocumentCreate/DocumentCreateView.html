@@ -1,4 +1,4 @@
-<p>All Documents</p>
+<h2>Create Document</h2>
 <div ng-controller="documentCreateCtrl">
     <fieldset>
         <legend>Enter Document Info</legend>
@@ -25,6 +25,8 @@
         <div ng-show="{{showSuccessMessage}}">Document saved Successfully!!!</div>
         <div ng-show="{{showErrorMessage}}">{{errorMessage}}</div>
         <div>{name:'{{name}}', description:'{{description}}', scanned:{{scanned}}, coloured:{{coloured}}, signed:{{signed}}}</div>
+        
+        <button onclick="">Save</button>
     </fieldset>
 
 </div>
