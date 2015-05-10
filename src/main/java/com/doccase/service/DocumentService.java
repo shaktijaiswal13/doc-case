@@ -21,4 +21,7 @@ public class DocumentService {
 		return documentDAO.retrieveDocuments();
 	}
 
+	public int deleteDocument(String id) {
+		return documentDAO.deleteDocument(id);
+	}
 }

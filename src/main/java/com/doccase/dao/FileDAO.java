@@ -8,6 +8,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 
 public class FileDAO {
 
@@ -33,6 +34,14 @@ public class FileDAO {
 		file.setName(docName);
 		file.setData(docData);
 		return file;
+	}
+
+	public int deleteFile(String id) {
+		DBCollection collection = DBConnectionFactory.getSharedFactory()
+				.getCollection("fileCollection");
+		WriteResult result = collection.remove(new BasicDBObject("_id",
+				new ObjectId(id)));
+		return result.getN();
 	}
 
 }
