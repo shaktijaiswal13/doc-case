@@ -16,13 +16,14 @@ angular.module('myApp.Documents', ['ngRoute'])
     $http.get("./rest/documents")
         .success(function(response) {
             $scope.documents = response;
-
             for (var i = 0; i < $scope.documents.length; i++) {
-                //var doc = $scope.documents[i]
+                var doc = $scope.documents[i]
                 doc.url = "." + encodeURI(doc.url) + "/inline"
             }
         });
-    $scope.getImageURI = function(id) {
-        return "./rest/documents/retrieve/" + encodeURIComponent(id)
+    $scope.deleteDocument = function(document) {
+        var url = ".rest/documents/" + encodeURIComponent(document.id);
+        $http.delete(url);
+
     };
 });
