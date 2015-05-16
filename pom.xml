@@ -82,23 +82,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>/Users/shaktikumar/Documents/softwares/apache-tomcat-7.0.59/webapps/doc-case</directory>
-						</fileset>
-						<fileset>
-							<directory>/Users/shaktikumar/Documents/softwares/apache-tomcat-7.0.59/webapps</directory>
-							<includes>
-								<include>*.war</include>
-							</includes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
@@ -113,8 +96,7 @@
 							</excludes>
 						</resource>
 					</webResources>
-					<warName>doc-case</warName>
-					<outputDirectory>/Users/shaktikumar/Documents/softwares/apache-tomcat-7.0.59/webapps</outputDirectory>
+					<!-- <outputDirectory>/Users/shakumar/Downloads</outputDirectory> -->
 				</configuration>
 			</plugin>
 		</plugins>
