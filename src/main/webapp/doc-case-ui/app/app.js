@@ -4,11 +4,11 @@
 angular.module('myApp', [
     'ngRoute',
     'myApp.Documents',
-    'myApp.DocumentUpload',
+    'myApp.DocumentsSearch',
     'myApp.DocumentCreate',
 ]).
 config(['$routeProvider',
     function($routeProvider) {
-        //     redirectTo: '/view1'
+        redirectTo: '#'
     }
 ]);

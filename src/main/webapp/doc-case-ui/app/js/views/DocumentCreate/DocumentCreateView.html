@@ -1,34 +1,42 @@
-<h2>Create Document</h2>
 <div ng-controller="documentCreateCtrl">
-    <fieldset>
+    <h2>Create Document</h2> 
+    <div class="form-horizontal">
         <legend>Enter Document Info</legend>
-        <div>
-            <label>Document Name:</label>
-            <input type="text" name="name" ng-model="document.name" size="39">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Document Name:</label>
+            <input type="text" name="name" ng-model="model.document.name" size="39">
         </div>
-        <div>
-            <label>Scanned:</label>
-            <input type="checkbox" name="scanned" ng-model="document.scanned">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Scanned:</label>
+            <input type="checkbox" name="scanned" ng-model="model.document.scanned">
         </div>
-        <div>
-            <label>Description:</label>
-            <input type="text" name="description" ng-model="document.description">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Description:</label>
+            <input type="text" name="description" ng-model="model.document.description">
         </div>
-        <div>
-            <label>Coloured:</label>
-            <input type="checkbox" name="coloured" ng-model="document.coloured">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Coloured:</label>
+            <input type="checkbox" name="coloured" ng-model="model.document.coloured">
         </div>
-        <div>
-            <label>Signed:</label>
-            <input type="checkbox" name="signed" ng-model="document.signed">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Signed:</label>
+            <input type="checkbox" name="signed" ng-model="model.document.signed">
         </div>
-        <div>
-            <label>File:</label>
-            <input type="file" file-model="myFile" />
+        <div class="form-group">
+            <input type="file" file-model="myFile" class="col-sm-offset-2 col-sm-10"/>
         </div>
-        <div ng-show="{{showSuccessMessage}}">Document saved Successfully!!!</div>
-        <div ng-show="{{showErrorMessage}}">{{errorMessage}}</div>
-        <button ng-click="uploadFile(document)" class="btn btn-primary">Save</button>
-    </fieldset>
-
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button ng-disabled="model.temp.showSuccessMessage" ng-click="uploadFile(model)" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="alert alert-danger" ng-show="model.temp.showErrorMessage">
+            <strong>Error!</strong> {{model.temp.errorMessage}}
+        </div>
+        <div class="alert alert-success" ng-show="model.temp.showSuccessMessage">
+            <strong>Success!</strong> Document saved Successfully!!!
+        </div>
+    </div>
 </div>
