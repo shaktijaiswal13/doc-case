@@ -10,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -48,8 +49,11 @@ public class DocumentResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Document> retrieveDocuments() {
-		List<Document> documentList = documentService.retrieveDocuments();
+	public List<Document> retrieveDocuments(@QueryParam("query") String query) {
+
+		List<Document> documentList = new ArrayList<>();
+
+		documentList.addAll(documentService.retrieveDocuments(query));
 		return documentList;
 	}
 

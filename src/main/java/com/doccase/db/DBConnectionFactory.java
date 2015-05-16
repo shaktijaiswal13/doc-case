@@ -2,6 +2,7 @@ package com.doccase.db;
 
 import java.net.UnknownHostException;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
@@ -10,7 +11,7 @@ import com.mongodb.MongoClient;
 /**
  * 
  * @author shakumar
- *
+ * 
  */
 public class DBConnectionFactory {
 
@@ -21,6 +22,12 @@ public class DBConnectionFactory {
 	private DBConnectionFactory() throws UnknownHostException {
 		client = new MongoClient();
 		System.out.println("New mongo client is created..");
+		DB db = client.getDB("test");
+		DBCollection coll = db.getCollection("documentCollection");
+		coll.createIndex(new BasicDBObject("name", "text").append(
+				"description", "text"));
+		System.out.println("index created..");
+
 	}
 
 	public DBCollection getCollection(String collectionName) {
@@ -57,10 +64,11 @@ public class DBConnectionFactory {
 		}
 		return INSTANCE;
 	}
+
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
 		client.close();
-		
+
 	}
 }

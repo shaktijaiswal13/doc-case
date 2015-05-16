@@ -34,10 +34,19 @@ public class DocumentDAO {
 		return String.valueOf(obj.get("_id"));
 	}
 
-	public List<Document> retrieveDocuments() {
+	public List<Document> retrieveDocuments(String query) {
 		List<Document> documentList = new ArrayList<>();
-		DBCursor cursor = DBConnectionFactory.getSharedFactory()
-				.getCollection("documentCollection").find();
+		DBCursor cursor;
+
+		DBCollection collection = DBConnectionFactory.getSharedFactory()
+				.getCollection("documentCollection");
+
+		if (query != null && !query.isEmpty()) {
+			cursor = collection.find(new BasicDBObject("$text",
+					new BasicDBObject("$search", query)));
+		} else {
+			cursor = collection.find();
+		}
 		while (cursor.hasNext()) {
 			DBObject obj = (DBObject) cursor.next();
 			Document document = new Document();

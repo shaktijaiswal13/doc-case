@@ -17,11 +17,11 @@ public class DocumentService {
 		return documentDAO.saveDocument(document);
 	}
 
-	public List<Document> retrieveDocuments() {
-		return documentDAO.retrieveDocuments();
-	}
-
 	public int deleteDocument(String id) {
 		return documentDAO.deleteDocument(id);
+	}
+
+	public List<Document> retrieveDocuments(String query) {
+		return documentDAO.retrieveDocuments(query);
 	}
 }
