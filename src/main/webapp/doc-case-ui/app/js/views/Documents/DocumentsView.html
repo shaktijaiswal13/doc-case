@@ -1,13 +1,26 @@
 <h2>All Documents</h2>
 <div ng-controller="documentsCtrl">
+    <div class="alert alert-danger" ng-show="showErrorMessage">
+        <strong>Error!</strong> {{errorMessage}}
+    </div>
     <table>
         <tr ng-repeat="doc in documents">
-            <td>{{ doc.name }}</td>
-            <td>
-                <img src="{{doc.url}}" class="img-thumbnail" alt="{{doc.name}}" height="100px" width="100px" />
+            <td ng-show="!doc.temp.showSuccessMessage">{{ doc.name }}</td>
+            <td ng-show="!doc.temp.showSuccessMessage">
+                <img src="{{doc.url}}" class="img-thumbnail" alt="{{doc.name}}" height="100px" width="100px"  />
+            </td>
+            <td ng-show="!doc.temp.showSuccessMessage">
+                <button ng-click="deleteDocument(doc)" class="btn btn-danger">Delete</button>
             </td>
             <td>
-                <button ng-click="deleteDocument(doc)" class="btn btn-primary">Delete</button>
+                <div>
+                    <div class="alert alert-danger" ng-show="doc.temp.showErrorMessage">
+                        <strong>Error!</strong> {{doc.temp.errorMessage}}
+                    </div>
+                    <div class="alert alert-success" ng-show="doc.temp.showSuccessMessage">
+                        <strong>Success!</strong> Document deleted Successfully!!!
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
