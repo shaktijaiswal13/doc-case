@@ -1,10 +1,13 @@
-<div ng-controller="documentCreateCtrl">
+<div ng-controller="documentCreateCtrl" class='container'>
     <h2>Create Document</h2> 
     <div class="form-horizontal">
         <legend>Enter Document Info</legend>
         <div class="form-group">
+            <input type="file" file-model="myFile" class="col-sm-offset-2 col-sm-10" />
+        </div>
+        <div class="form-group">
             <label class="control-label col-sm-2">Document Name:</label>
-            <input type="text" name="name" ng-model="model.document.name" size="39">
+            <input type="text" name="name" ng-model="model.document.name" size="50">
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Scanned:</label>
@@ -12,7 +15,7 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Description:</label>
-            <input type="text" name="description" ng-model="model.document.description">
+            <input type="text" name="description" ng-model="model.document.description" size="50">
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Coloured:</label>
@@ -21,9 +24,6 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Signed:</label>
             <input type="checkbox" name="signed" ng-model="model.document.signed">
-        </div>
-        <div class="form-group">
-            <input type="file" file-model="myFile" class="col-sm-offset-2 col-sm-10"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

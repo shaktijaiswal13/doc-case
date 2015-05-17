@@ -7,6 +7,14 @@
         <input type="text" name="name" ng-model="document.query" size="100" placeholder="Search documents" data-provide="typeahead" id="name" class="form-control">
         <!--        <button ng-click="search(document.query)" class="btn btn-primary btn-md">Search</button>-->
     </div>
-    <pre id="queryResult">Result: {{asyncSelected | json}}</pre>
-    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+    <div id="queryResult"></div>
+<!--
+    <table>
+        <tr ng-repeat="doc in documents">
+            <td>
+                <documentoverview model="doc"></documentoverview>
+            </td>
+        </tr>
+    </table>
+-->
 </div>

@@ -15,6 +15,7 @@ angular.module('myApp.DocumentCreate', ['ngRoute'])
 .controller('documentCreateCtrl', ['$scope', '$http', 'fileUpload',
     function($scope, $http, fileUpload) {
         $scope.model = {
+            document: {},
             temp: {
                 showSuccessMessage: false
             }
@@ -25,6 +26,7 @@ angular.module('myApp.DocumentCreate', ['ngRoute'])
         $scope.uploadFile = function(model) {
             var file = $scope.myFile;
             console.log(file) //{webkitRelativePath: "", lastModified: 1430866129000, lastModifiedDate: Tue May 05 2015 23:48:49 GMT+0100 (IST), name: "Page 1&2.png", type: "image/png"…}
+            $scope.model.document.name = file.name;
             console.log('file is ' + JSON.stringify(file));
             var uploadUrl = "./rest/file";
             fileUpload.uploadFileToUrl(file, uploadUrl, model);
@@ -42,6 +44,7 @@ angular.module('myApp.DocumentCreate', ['ngRoute'])
                 var modelSetter = model.assign;
 
                 element.bind('change', function() {
+                    scope.model.document.name = element[0].files[0].name;
                     scope.$apply(function() {
                         modelSetter(scope, element[0].files[0]);
                     });
@@ -77,15 +80,15 @@ angular.module('myApp.DocumentCreate', ['ngRoute'])
                     }).error(function(err) {
                         model.temp.showErrorMessage = true;
                         model.temp.showSuccessMessage = false;
-                        model.temp.errorMessage = "error in saving document...." + err;
+                        model.temp.errorMessage = "Error in saving document...." + err;
                         console.log(model.temp.errorMessage);
                     });
             }).error(function(err) {
                 model.temp.showErrorMessage = true;
                 model.temp.showSuccessMessage = false;
-                model.temp.errorMessage = "error in saving file...." + err;
+                model.temp.errorMessage = "Error in saving file...." + err;
                 console.log(model.temp.errorMessage);
-                
+
                 console.log(err);
             });
         }
