@@ -37,7 +37,8 @@ public class FileResource {
 	public Response saveFileData(
 			@Context HttpServletRequest request,
 			@FormDataParam("file") InputStream fileStream,
-			@FormDataParam("file") FormDataContentDisposition contentDispositionHeader) {
+			@FormDataParam("file") FormDataContentDisposition contentDispositionHeader)
+			throws IOException {
 
 		String fileName = contentDispositionHeader.getFileName();
 		int fileSize = request.getContentLength();
@@ -47,11 +48,7 @@ public class FileResource {
 		int byteRead = 0;
 		int totalBytesRead = 0;
 		while (totalBytesRead < fileSize) {
-			try {
-				byteRead = fileStream.read(fileData, totalBytesRead, fileSize);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			byteRead = fileStream.read(fileData, totalBytesRead, fileSize);
 			totalBytesRead += byteRead;
 		}
 
@@ -73,7 +70,7 @@ public class FileResource {
 
 	@GET
 	@Path("{id}/inline")
-	public Response retrieveFileAsInline(@PathParam("id") String id) {
+	public synchronized Response retrieveFileAsInline(@PathParam("id") String id) {
 
 		final File file = fileService.retrieveFile(id);
 
@@ -83,10 +80,10 @@ public class FileResource {
 
 		String docName = file.getName();
 		String[] docNameArray = docName.split("\\.");
-		response.header("content-type", "image/" + docNameArray[1]);
+		response.header("content-type", "image/jpeg");// + docNameArray[1]);
 		response.header("content-disposition",
 				"inline; filename=" + file.getName());
-
+		
 		return response.entity(st).build();
 	}
 
@@ -94,12 +91,7 @@ public class FileResource {
 		StreamingOutput st = new StreamingOutput() {
 			@Override
 			public void write(OutputStream os) throws IOException {
-				try {
-					os.write(file.getData());
-					os.close();
-				} catch (Exception e) {
-					throw new WebApplicationException(e);
-				}
+				os.write(file.getData());
 			}
 		};
 		return st;

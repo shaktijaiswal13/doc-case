@@ -54,7 +54,7 @@ angular.module('myApp.DocumentsSearch', ['ngRoute'])
                     console.log("preProcess data: " + data);
                     $("#queryResult").html(createHtml(data));
                     // We good!
-                    return transformedData;
+                    return false;
                 }
             },
             onSelect: displayResult,
