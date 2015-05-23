@@ -30,9 +30,21 @@ public class DBConnectionFactory {
 
 	}
 
-	public DBCollection getCollection(String collectionName) {
+	public DBCollection getDocumentCollection() {
 		DB db = client.getDB("test");
-		DBCollection coll = db.getCollection(collectionName);
+		DBCollection coll = db.getCollection("documentCollection");
+		return coll;
+	}
+
+	public DBCollection getLabelCollection() {
+		DB db = client.getDB("test");
+		DBCollection coll = db.getCollection("labelCollection");
+		return coll;
+	}
+
+	public DBCollection getFileCollection() {
+		DB db = client.getDB("test");
+		DBCollection coll = db.getCollection("fileCollection");
 		return coll;
 	}
 

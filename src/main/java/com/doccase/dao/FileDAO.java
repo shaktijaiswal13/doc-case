@@ -14,7 +14,7 @@ public class FileDAO {
 
 	public String saveFile(File file) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("fileCollection");
+				.getFileCollection();
 		BasicDBObject obj = new BasicDBObject("name", file.getName()).append(
 				"data", file.getData());
 		collection.insert(obj);
@@ -24,7 +24,7 @@ public class FileDAO {
 
 	public File retrieveFile(String id) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("fileCollection");
+				.getFileCollection();
 		DBCursor cursor = collection.find(new BasicDBObject("_id",
 				new ObjectId(id)));
 		DBObject obj = (DBObject) cursor.next();
@@ -38,7 +38,7 @@ public class FileDAO {
 
 	public int deleteFile(String id) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("fileCollection");
+				.getFileCollection();
 		WriteResult result = collection.remove(new BasicDBObject("_id",
 				new ObjectId(id)));
 		return result.getN();

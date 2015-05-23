@@ -13,6 +13,7 @@
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "3.3.4",
     "jquery": "2.1.4",
-    "bs-typeahead": "~0.0.5"
+    "bs-typeahead": "~0.0.5",
+    "bootstrap-tagsinput": "~0.4.2"
   }
 }

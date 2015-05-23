@@ -10,24 +10,18 @@
             <input type="text" name="name" ng-model="model.document.name" size="50">
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">Scanned:</label>
-            <input type="checkbox" name="scanned" ng-model="model.document.scanned">
+            <label class="control-label col-sm-2">Labels:</label>
+            <div>
+                <input id="labels" type="text" data-role="tagsinput" />
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Description:</label>
             <input type="text" name="description" ng-model="model.document.description" size="50">
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">Coloured:</label>
-            <input type="checkbox" name="coloured" ng-model="model.document.coloured">
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2">Signed:</label>
-            <input type="checkbox" name="signed" ng-model="model.document.signed">
-        </div>
-        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button ng-disabled="model.temp.showSuccessMessage" ng-click="uploadFile(model)" class="btn btn-primary">Save</button>
+                <button ng-disabled="model.temp.showSuccessMessage" ng-click="saveDocument(model)" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

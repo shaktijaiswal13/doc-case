@@ -52,7 +52,7 @@ angular.module('myApp.DocumentsSearch', ['ngRoute'])
                     })
                     $scope.documents = data;
                     console.log("preProcess data: " + data);
-                    $("#queryResult").html(createHtml(data));
+                    //$("#queryResult").html(createHtml(data));
                     // We good!
                     return false;
                 }

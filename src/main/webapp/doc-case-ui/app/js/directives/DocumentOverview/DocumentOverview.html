@@ -1,25 +1,18 @@
-<table>
-    <tr>
-        <td>
-            <div class="alert alert-danger" ng-show="showErrorMessage">
-                <strong>Error!</strong> {{errorMessage}}
-            </div>
-        </td>
-        <td>
-            <div>
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
                 <img src="{{model.url}}" class="img-thumbnail" alt="{{model.name}}" height="100px" width="100px" />
             </div>
-        </td>
-        <td>
-            <div>
+            <div class="col-md-4">
                 <label>{{model.name}}</label>
-                <div>{{model.description}}</div>
+                <p>
+                    <div>{{model.description}}</div>
+                </p>
             </div>
-        </td>
-        <td>
-            <div>
+            <div class="col-md-3">
                 <a href="{{model.downloadUrl}}">Download</a>
             </div>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>

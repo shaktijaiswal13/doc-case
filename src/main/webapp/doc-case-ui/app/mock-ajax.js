@@ -35,3 +35,25 @@ $.mockjax({
         }];
     }
 });
+
+$.mockjax({
+    url: './rest/labels',
+    response: function() {
+        this.responseText = ["Amsterdam",
+            "London",
+            "Paris",
+            "Washington",
+            "New York",
+            "Los Angeles",
+            "Sydney",
+            "Melbourne",
+            "Canberra",
+            "Beijing",
+            "New Delhi",
+            "Kathmandu",
+            "Cairo",
+            "Cape Town",
+            "Kinshasa"
+        ];
+    }
+});

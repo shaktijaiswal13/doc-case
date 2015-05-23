@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 
 import com.doccase.db.DBConnectionFactory;
 import com.doccase.domain.Document;
+import com.doccase.service.LabelService;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -16,10 +17,11 @@ import com.mongodb.WriteResult;
 public class DocumentDAO {
 
 	FileDAO fileDAO = new FileDAO();
-
+	
+LabelService labelService=new LabelService();
 	public String saveDocument(Document document) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("documentCollection");
+				.getDocumentCollection();
 		BasicDBObject obj = new BasicDBObject("name", document.getName())
 				.append("scanned", document.getScanned())
 				.append("url", document.getUrl())
@@ -27,8 +29,9 @@ public class DocumentDAO {
 				.append("description", document.getDescription())
 				.append("signed", document.getSigned())
 				.append("type", document.getType())
-				.append("label", document.getLabel());
+				.append("labels", document.getLabels());
 		collection.insert(obj);
+		List<String> savedLabelIds = labelService.saveLabels(document.getLabels());
 		System.out.println("document saved with id "
 				+ String.valueOf(obj.get("_id")));
 		return String.valueOf(obj.get("_id"));
@@ -39,7 +42,7 @@ public class DocumentDAO {
 		DBCursor cursor;
 
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("documentCollection");
+				.getDocumentCollection();
 
 		if (query != null && !query.isEmpty()) {
 			cursor = collection.find(new BasicDBObject("$text",
@@ -66,7 +69,7 @@ public class DocumentDAO {
 
 	public int deleteDocument(String id) {
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
-				.getCollection("documentCollection");
+				.getDocumentCollection();
 
 		BasicDBObject obj = new BasicDBObject("_id", new ObjectId(id));
 		DBCursor cursor = collection.find(obj);

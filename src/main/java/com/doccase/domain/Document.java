@@ -1,5 +1,7 @@
 package com.doccase.domain;
 
+import java.util.List;
+
 public class Document {
 
 	private String id;
@@ -10,7 +12,7 @@ public class Document {
 	private String signed;
 	private String description;
 	private String type;
-	private String[] label;
+	private List<String> labels;
 
 	public String getId() {
 		return id;
@@ -76,12 +78,12 @@ public class Document {
 		this.type = type;
 	}
 
-	public String[] getLabel() {
-		return label;
+	public List<String> getLabels() {
+		return labels;
 	}
 
-	public void setLabel(String[] label) {
-		this.label = label;
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
 	}
 
 }

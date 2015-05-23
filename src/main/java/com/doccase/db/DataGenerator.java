@@ -13,8 +13,8 @@ public class DataGenerator {
 
 	public static void main(String[] args) throws IOException {
 		// Mongo client = DBConnectionFactory.getSharedFactory().getClient();
-		final File folder = new File(//"/Users/shakumar/Desktop/WallPaper1");
-		 "/Users/shakumar/projects/doc-case/src/main/resources/images");
+		final File folder = new File(// "/Users/shakumar/Desktop/WallPaper1");
+				"/Users/shakumar/projects/doc-case/src/main/resources/images");
 		listFilesForFolder(folder);
 	}
 
@@ -25,9 +25,9 @@ public class DataGenerator {
 				listFilesForFolder(fileEntry);
 			} else {
 				DBCollection fileCollection = DBConnectionFactory
-						.getSharedFactory().getCollection("fileCollection");
+						.getSharedFactory().getFileCollection();
 				DBCollection documentCollection = DBConnectionFactory
-						.getSharedFactory().getCollection("documentCollection");
+						.getSharedFactory().getDocumentCollection();
 				String fullFileName = fileEntry.getName();
 				String fileNameWithoutExt = fullFileName.split("\\.")[0];
 				String[] tokens = fileNameWithoutExt.replace("-", " ")
@@ -36,8 +36,8 @@ public class DataGenerator {
 				String description = tokens.length > 1 ? tokens[1] : tokens[0];
 				System.out.println("name:" + name + ", description:"
 						+ description);
-				Object fileId = saveFile(fileEntry, fileNameWithoutExt
-						+ "."+fullFileName.split("\\.")[1], fileCollection);
+				Object fileId = saveFile(fileEntry, fileNameWithoutExt + "."
+						+ fullFileName.split("\\.")[1], fileCollection);
 				System.out.println("file save with id " + fileId);
 				Object docId = saveDocument(name, description,
 						documentCollection, fileId);

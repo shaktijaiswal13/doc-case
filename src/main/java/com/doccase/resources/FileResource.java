@@ -3,7 +3,10 @@ package com.doccase.resources;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.FileNameMap;
+import java.net.URLConnection;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,7 +14,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -79,11 +81,10 @@ public class FileResource {
 		ResponseBuilder response = Response.status(Status.OK);
 
 		String docName = file.getName();
-		String[] docNameArray = docName.split("\\.");
-		response.header("content-type", "image/jpeg");// + docNameArray[1]);
+		response.header("content-type", identifyMimeType(docName));
 		response.header("content-disposition",
-				"inline; filename=" + file.getName());
-		
+				"inline; filename=" + docName);
+
 		return response.entity(st).build();
 	}
 
@@ -95,5 +96,21 @@ public class FileResource {
 			}
 		};
 		return st;
+	}
+
+	private String identifyMimeType(String fileName) {
+		FileNameMap fileNameMap = URLConnection.getFileNameMap();
+		String mimeType = fileNameMap.getContentTypeFor(fileName);
+		return mimeType;
+	}
+	public static void main(String[] args) {
+		try {
+			FileNameMap fileNameMap = URLConnection.getFileNameMap();
+			String mimeType = fileNameMap.getContentTypeFor("alert.pdf");
+			System.err.println(mimeType);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

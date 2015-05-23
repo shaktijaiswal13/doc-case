@@ -38,7 +38,6 @@ public class DocumentResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response saveDocuments(List<Document> documents) {
-
 		List<String> documentIdsList = new ArrayList<>();
 		for (Document document : documents) {
 			documentIdsList.add(documentService.saveDocument(document));

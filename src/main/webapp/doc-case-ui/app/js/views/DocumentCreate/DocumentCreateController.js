@@ -20,8 +20,32 @@ angular.module('myApp.DocumentCreate', ['ngRoute'])
                 showSuccessMessage: false
             }
         }
+        $('#labels').tagsinput({
+            tagClass: function(item) {
+                switch (item) {
+                    case 'Europe':
+                        return 'label label-primary';
+                    case 'America':
+                        return 'label label-danger label-important';
+                    case 'Australia':
+                        return 'label label-success';
+                    case 'Africa':
+                        return 'label label-default';
+                    case 'Asia':
+                        return 'label label-warning';
+                    default:
+                        return 'label label-primary';
+                }
+            },
+            typeahead: {
+                ajax: {
+                    url: './rest/labels'
+                }
+            }
+        });
         $scope.saveDocument = function(model) {
-            uploadFile(model);
+            model.document.labels = $("#labels").tagsinput('items');
+            this.uploadFile(model);
         };
         $scope.uploadFile = function(model) {
             var file = $scope.myFile;
