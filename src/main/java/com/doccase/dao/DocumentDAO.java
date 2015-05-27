@@ -23,11 +23,8 @@ LabelService labelService=new LabelService();
 		DBCollection collection = DBConnectionFactory.getSharedFactory()
 				.getDocumentCollection();
 		BasicDBObject obj = new BasicDBObject("name", document.getName())
-				.append("scanned", document.getScanned())
 				.append("url", document.getUrl())
-				.append("coloured", document.getColoured())
 				.append("description", document.getDescription())
-				.append("signed", document.getSigned())
 				.append("type", document.getType())
 				.append("labels", document.getLabels());
 		collection.insert(obj);
@@ -55,13 +52,10 @@ LabelService labelService=new LabelService();
 			Document document = new Document();
 			document.setId(((ObjectId) obj.get("_id")).toString());
 			document.setName((String) obj.get("name"));
-			document.setScanned((String) obj.get("scanned"));
 			document.setUrl((String) obj.get("url"));
-			document.setColoured((String) obj.get("coloured"));
 			document.setDescription((String) obj.get("description"));
-			document.setSigned((String) obj.get("signed"));
 			document.setType((String) obj.get("type"));
-			// document.setLabel(obj.get("label"));
+			 document.setLabels((List<String>)obj.get("labels"));
 			documentList.add(document);
 		}
 		return documentList;

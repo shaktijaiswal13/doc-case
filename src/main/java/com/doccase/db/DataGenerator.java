@@ -3,18 +3,18 @@ package com.doccase.db;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 
 public class DataGenerator {
-	private static Random random = new Random();
 
 	public static void main(String[] args) throws IOException {
 		// Mongo client = DBConnectionFactory.getSharedFactory().getClient();
-		final File folder = new File(// "/Users/shakumar/Desktop/WallPaper1");
-				"/Users/shakumar/projects/doc-case/src/main/resources/images");
+		final File folder = new File("/Users/shakumar/Desktop/mydoc");
+		// "/Users/shakumar/projects/doc-case/src/main/resources/images");
 		listFilesForFolder(folder);
 	}
 
@@ -29,17 +29,21 @@ public class DataGenerator {
 				DBCollection documentCollection = DBConnectionFactory
 						.getSharedFactory().getDocumentCollection();
 				String fullFileName = fileEntry.getName();
-				String fileNameWithoutExt = fullFileName.split("\\.")[0];
-				String[] tokens = fileNameWithoutExt.replace("-", " ")
-						.replace("_", " ").split(",");
-				String name = tokens[0];
+				String[] tokensWithDot = fullFileName.split("\\.");
+				String tokenBeforeDot = tokensWithDot[0];
+				String[] tokens = tokenBeforeDot.split(",");
+				String name = tokens[0].replace(" ", "_");
 				String description = tokens.length > 1 ? tokens[1] : tokens[0];
+				List<String> labels = new ArrayList<String>();
+				for (int i = 2; i < tokens.length; i++) {
+					labels.add(tokens[i]);
+				}
 				System.out.println("name:" + name + ", description:"
 						+ description);
-				Object fileId = saveFile(fileEntry, fileNameWithoutExt + "."
-						+ fullFileName.split("\\.")[1], fileCollection);
+				String newFileName = name + "." + tokensWithDot[1];
+				Object fileId = saveFile(fileEntry, newFileName, fileCollection);
 				System.out.println("file save with id " + fileId);
-				Object docId = saveDocument(name, description,
+				Object docId = saveDocument(name, description, labels,
 						documentCollection, fileId);
 				System.out.println("document saved with id "
 						+ String.valueOf(docId));
@@ -48,14 +52,10 @@ public class DataGenerator {
 	}
 
 	private static Object saveDocument(String name, String description,
-			DBCollection collection, Object fileId) {
+			List<String> labels, DBCollection collection, Object fileId) {
 		BasicDBObject docObj = new BasicDBObject("name", name)
-				.append("scanned", String.valueOf(random.nextBoolean()))
 				.append("url", "/rest/file/" + fileId)
-				.append("coloured", String.valueOf(random.nextBoolean()))
-				.append("description", description)
-				.append("signed", String.valueOf(random.nextBoolean()))
-				.append("type", "jpeg").append("label", "");
+				.append("description", description).append("labels", labels);
 		collection.insert(docObj);
 		Object docId = docObj.get("_id");
 		return docId;

@@ -25,7 +25,7 @@ public class DBConnectionFactory {
 		DB db = client.getDB("test");
 		DBCollection coll = db.getCollection("documentCollection");
 		coll.createIndex(new BasicDBObject("name", "text").append(
-				"description", "text"));
+				"description", "text").append("labels", "text"));
 		System.out.println("index created..");
 
 	}

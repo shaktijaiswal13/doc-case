@@ -1,20 +1,22 @@
-<div class='container' ng-controller="documentsSearchCtrl">
+<div class='container' ng-controller='documentsSearchCtrl'>
     <h2>Documents Search</h2>
     <div>
-        <div class="row">
-            <div class="alert alert-block alert-success"></div>
+        <div class='row'>
+            <div class='alert alert-block alert-success'></div>
         </div>
-        <input type="text" name="name" ng-model="document.query" size="100" placeholder="Search documents" data-provide="typeahead" id="name" class="form-control">
-        <!--        <button ng-click="search(document.query)" class="btn btn-primary btn-md">Search</button>-->
+        <input type='text' name='name' ng-model='document.query' size='100' placeholder='Search documents' data-provide='typeahead' id='name' class='form-control'>
+        <!--        <button ng-click='search(document.query)' class='btn btn-primary btn-md'>Search</button>-->
     </div>
-    <div id="queryResult"></div>
+    <div id='queryResult'></div>
 
+<!--
     <table>
-        <tr ng-repeat="doc in documents">
+        <tr ng-repeat='doc in documents'>
             <td>
-                <documentoverview model="doc"></documentoverview>
+                <documentoverview model='doc'></documentoverview>
             </td>
         </tr>
     </table>
-
+-->
 </div>
+

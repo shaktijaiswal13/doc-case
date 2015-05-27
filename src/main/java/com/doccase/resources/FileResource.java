@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -82,8 +81,22 @@ public class FileResource {
 
 		String docName = file.getName();
 		response.header("content-type", identifyMimeType(docName));
-		response.header("content-disposition",
-				"inline; filename=" + docName);
+		response.header("content-disposition", "inline; filename=" + docName);
+
+		return response.entity(st).build();
+	}
+
+	@GET
+	@Path("{id}/attachment")
+	public synchronized Response retrieveFileAsAttachment(
+			@PathParam("id") String id) {
+		final File file = fileService.retrieveFile(id);
+		StreamingOutput st = getFileData(file);
+		ResponseBuilder response = Response.status(Status.OK);
+		String docName = file.getName();
+		response.header("content-type", identifyMimeType(docName));
+		response.header("content-disposition", "attachment; filename="
+				+ docName);
 
 		return response.entity(st).build();
 	}
@@ -103,6 +116,7 @@ public class FileResource {
 		String mimeType = fileNameMap.getContentTypeFor(fileName);
 		return mimeType;
 	}
+
 	public static void main(String[] args) {
 		try {
 			FileNameMap fileNameMap = URLConnection.getFileNameMap();

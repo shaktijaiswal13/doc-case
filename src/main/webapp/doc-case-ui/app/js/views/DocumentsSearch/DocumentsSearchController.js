@@ -21,7 +21,7 @@ angular.module('myApp.DocumentsSearch', ['ngRoute'])
             var html = "<table>";
             var i = 0;
             for (i = 0; i < docs.length; i++) {
-                html = html + "<tr><td><div><img src='" + docs[i].url + "' class='img-thumbnail' alt='" + docs[i].name + "' height='100px' width='100px' /></div></td><td><div><label>" + docs[i].name + "</label><div>" + docs[i].description + "</div></div></td><td><div><a href='" + docs[i].downloadUrl + "'>Download</a></div></td></tr>";
+                html = html + "<tr><td><div><div class='container'><div class='row'><div class='col-md-2'><img src='" + docs[i].url + "' class='img-thumbnail' alt='" + docs[i].name + "' height='100px' width='100px' /></div><div class='col-md-4'><label>" + docs[i].name + "</label><p><div>" + docs[i].description + "</div></p></div><div class='col-md-3'><a href='" + docs[i].downloadUrl + "'>Download</a></div></div></div></div></td></tr>";
             }
             html = html + "</table>";
             return html;
@@ -52,7 +52,7 @@ angular.module('myApp.DocumentsSearch', ['ngRoute'])
                     })
                     $scope.documents = data;
                     console.log("preProcess data: " + data);
-                    //$("#queryResult").html(createHtml(data));
+                    $("#queryResult").html(createHtml(data));
                     // We good!
                     return false;
                 }

@@ -6,10 +6,7 @@ public class Document {
 
 	private String id;
 	private String name;
-	private String scanned;
 	private String url;
-	private String coloured;
-	private String signed;
 	private String description;
 	private String type;
 	private List<String> labels;
@@ -30,36 +27,12 @@ public class Document {
 		this.name = name;
 	}
 
-	public String getScanned() {
-		return scanned;
-	}
-
-	public void setScanned(String scanned) {
-		this.scanned = scanned;
-	}
-
 	public String getUrl() {
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public String getColoured() {
-		return coloured;
-	}
-
-	public void setColoured(String coloured) {
-		this.coloured = coloured;
-	}
-
-	public String getSigned() {
-		return signed;
-	}
-
-	public void setSigned(String signed) {
-		this.signed = signed;
 	}
 
 	public String getDescription() {
